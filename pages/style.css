@@ -1,6 +1,10 @@
 :root{
     --btn-bgColor :  hsl(194, 88%, 35%);
     --btn-text-clr : #fff;
+    --inp-bgColor : #ddd;
+
+    --card-min-width : 300px;
+    --small-gap : 20px;
 }
 *, *::before, *::after{
     padding: 0;
@@ -9,11 +13,8 @@
 }
 .container {
     display: grid;
-    grid-template: 1fr 5fr / minmax(max-content, 300px) 1fr;
+    grid-template: 1fr 5fr / minmax(180px, 300px) 1fr;
     height: 100vh;
-    & > *{
-        border: 2px solid #453;
-    }
 }
 .left-side{
     background: var(--btn-bgColor);
@@ -21,8 +22,8 @@
     color: var(--btn-text-clr);
     display: grid;
     grid-template-rows: repeat(auto-fit, 50px);
-    padding-left: 20px;
-    font-weight: 800;
+    padding: 20px;
+    font-weight: 600;
     & > div{
         display: grid;
         grid-template-columns: 30px 1fr;
@@ -37,23 +38,27 @@ header{
     padding: 20px;
 
     display: grid;
-    grid-template-columns: repeat(2, 30px) 1fr 100px 90px 10px 100px;
-    gap: 20px;
+    grid-template-columns: repeat(2, 30px) minmax(200px, 1fr) 100px 60px 10px 100px;
+    gap: 25px;
     align-items: center;
 }
 input[type="search"]{
     grid-column: 2 / 4;
+    background-color: var(--inp-bgColor);
+    border: none;
+    border-radius: 20px;
+    max-width: 700px;
 }
 
 input[type="search"], .notification,
 .user-name, .search-icon{
     height: 30px;
 }
-.mini-profile{
-    height: 60px;
+.notification{
+    justify-self: end;
 }
 .user-name{
-    grid-column-start: 6;
+    grid-column: 6 / -1;
 }
 .main-profile{
     grid-row-start: 2;
@@ -73,4 +78,28 @@ input[type="search"], .notification,
 }
 .main-user-name, .new-btn, .upload-btn, .share-btn{
     grid-row-start: 2;
+}
+
+main{
+    background-color: var(--inp-bgColor);
+    display: grid;
+    grid-template-columns: 1fr minmax(calc(var(--card-min-width) - 50px), var(--card-min-width));
+    gap: var(--small-gap);
+    padding: var(--small-gap);
+}
+.card-container, .announcement{
+    margin-top: 20px;
+}
+.card-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(var(--card-min-width), 1fr));
+    gap: var(--small-gap);
+    max-height: calc(var(--card-min-width)*3);
+    overflow-y: auto;
+}
+.card{
+    min-height: 250px;
+    background: var(--btn-text-clr);
+    border-radius: 5px;
+    border-left: 6px solid #fc9709;
 }
