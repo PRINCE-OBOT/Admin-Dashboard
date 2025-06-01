@@ -3,8 +3,14 @@
     --btn-text-clr : #fff;
     --inp-bgColor : #ddd;
 
-    --card-min-width : 300px;
+    --card-min-width : 280px;
+    --card-hgt : 280px;
     --small-gap : 20px;
+
+    --border-radius : 8px;
+    --hgt-ratio : calc(var(--card-hgt) * 1.5);
+    --trend-hgt : calc(var(--hgt-ratio) + var(--small-gap) - calc(var(--small-gap) / 2));
+    --announcement-hgt : calc(var(--trend-hgt) + 20px) ;
 }
 *, *::before, *::after{
     padding: 0;
@@ -15,6 +21,8 @@
     display: grid;
     grid-template: 1fr 5fr / minmax(180px, 300px) 1fr;
     height: 100vh;
+    max-width: 1500px;
+    margin: 0 auto 0;
 }
 .left-side{
     background: var(--btn-bgColor);
@@ -47,7 +55,6 @@ input[type="search"]{
     background-color: var(--inp-bgColor);
     border: none;
     border-radius: 20px;
-    max-width: 700px;
 }
 
 input[type="search"], .notification,
@@ -83,23 +90,58 @@ input[type="search"], .notification,
 main{
     background-color: var(--inp-bgColor);
     display: grid;
-    grid-template-columns: 1fr minmax(calc(var(--card-min-width) - 50px), var(--card-min-width));
+    grid-template:  var(--announcement-hgt) var(--trend-hgt) / 1fr minmax(calc(var(--card-min-width) - 40px), var(--card-min-width));
     gap: var(--small-gap);
-    padding: var(--small-gap);
+    padding: 40px 20px;
+    & p{
+        color: #555;
+    }
 }
-.card-container, .announcement{
+.your-projects{
+    grid-row: 1 / 3;
+}
+.card-container, .announcements, .trending{
     margin-top: 20px;
+}
+.announcements, .trending{
+    background-color: var(--btn-text-clr);
+    border-radius: var(--border-radius);
 }
 .card-container{
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(var(--card-min-width), 1fr));
     gap: var(--small-gap);
-    max-height: calc(var(--card-min-width)*3);
+    max-height: calc(var(--trend-hgt) * 2);
     overflow-y: auto;
+    &::-webkit-scrollbar{
+        width: 7px;
+        background-color: #777;
+        border-radius: 10px;
+    }
+    &::-webkit-scrollbar-thumb{
+        background: #445;
+    }
 }
 .card{
-    min-height: 250px;
+    min-width: var(--card-min-width);
+    min-height: var(--card-hgt);
     background: var(--btn-text-clr);
-    border-radius: 5px;
+    border-radius: var(--border-radius);
     border-left: 6px solid #fc9709;
+}
+.announcements{
+    display: grid;
+    gap: 20px;
+    padding: 30px;
+    & p{
+        margin-top: 5px;
+    }
+}
+
+.trending{
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    align-items: center;
+    gap: 20px;
+    padding: 10px;
 }
